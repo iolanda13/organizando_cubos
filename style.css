@@ -1,0 +1,161 @@
+/* =========================================================
+   exercicio flexbox - organizando cubos
+   so css. o html nao foi alterado.
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --painel: #0c1f2e;   /* fundo escuro da pagina */
+  --quadrado: #123047; /* fundo de cada quadrado */
+  --borda: #244056;    /* tracejado em volta do quadrado */
+  --azul-1: #8ccbff;   /* caixinha 1: mais clara */
+  --azul-2: #54a8ee;   /* caixinha 2 */
+  --azul-3: #3482cc;   /* caixinha 3 */
+  --azul-4: #24609f;   /* caixinha 4: mais escura */
+
+  --lado: 300px;       /* tamanho do quadrado */
+  --espaco: 14px;      /* padding interno do quadrado */
+  --cubo: 50px;        /* caixinha padrao (16,8% do quadrado) */
+}
+
+body {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: var(--painel);
+  font-family: sans-serif;
+}
+
+/* grid 4x2 com os oito quadrados */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: calc(4 * var(--lado) + 3 * 20px);
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* base de todo quadrado: flex + caixinhas no canto */
+.quadrado {
+  display: flex;
+  width: var(--lado);
+  height: var(--lado);
+  padding: var(--espaco);
+  background: var(--quadrado);
+  border: 1px dashed var(--borda);
+  border-radius: 8px;
+}
+
+/* base de toda caixinha */
+.item {
+  width: var(--cubo);
+  height: var(--cubo);
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.item:nth-child(1) {
+  background: var(--azul-1);
+}
+
+.item:nth-child(2) {
+  background: var(--azul-2);
+}
+
+.item:nth-child(3) {
+  background: var(--azul-3);
+}
+
+.item:nth-child(4) {
+  background: var(--azul-4);
+}
+
+/* ---------------------------------------------------------
+   1: fileira no topo, centralizada na horizontal, com gap
+   --------------------------------------------------------- */
+.quadrado-1 {
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--espaco);
+}
+
+/* ---------------------------------------------------------
+   2: coluna de baixo pra cima, encostada embaixo e a esquerda
+   column-reverse inverte a ordem das caixinhas
+   --------------------------------------------------------- */
+.quadrado-2 {
+  flex-direction: column-reverse;
+  align-items: flex-start;
+}
+
+/* ---------------------------------------------------------
+   3: coluna centralizada, caixinhas espalhadas no eixo y
+   --------------------------------------------------------- */
+.quadrado-3 {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ---------------------------------------------------------
+   4: fileira no centro dos dois eixos
+   --------------------------------------------------------- */
+.quadrado-4 {
+  justify-content: center;
+  align-items: center;
+}
+
+/* ---------------------------------------------------------
+   5: canto inferior direito
+   --------------------------------------------------------- */
+.quadrado-5 {
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+/* ---------------------------------------------------------
+   6: fileira que ocupa a largura toda
+   flex: 1 divide o espaco, a segunda caixinha fica com o dobro
+   --------------------------------------------------------- */
+.quadrado-6 {
+  align-items: flex-start;
+}
+
+.quadrado-6 .item {
+  flex: 1;
+}
+
+.quadrado-6 .item:nth-child(2) {
+  flex: 2;
+}
+
+/* ---------------------------------------------------------
+   7: fileira no topo a esquerda, a terceira caixinha e branca
+   --------------------------------------------------------- */
+.quadrado-7 {
+  align-items: flex-start;
+}
+
+.quadrado-7 .item:nth-child(3) {
+  background: #ffffff;
+}
+
+/* ---------------------------------------------------------
+   8: quebra em duas linhas, duas caixinhas grandes por linha
+   flex-wrap: wrap joga a terceira caixinha pra linha de baixo
+   --------------------------------------------------------- */
+.quadrado-8 {
+  flex-wrap: wrap;
+  align-items: flex-start;
+  row-gap: 12%;
+}
+
+.quadrado-8 .item {
+  width: 37%;
+  height: 37%;
+}
